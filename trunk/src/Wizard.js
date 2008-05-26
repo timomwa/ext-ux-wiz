@@ -211,8 +211,8 @@ this.showLoadMask(true, 'validating');
              * Fires after the last card was reached in the wizard and the
              * next/finish-button has been clicked.
              * @param {Ext.ux.Wiz} this
-             * @param {array} data The collected data of the cards, whereas 
-             * the first index is the index of the card and the specific values
+             * @param {Object} data The collected data of the cards, whereas 
+             * the index is the id of the card and the specific values
              * are objects with key/value pairs in the form formElementName : value
              */   
             'finish'
@@ -225,7 +225,7 @@ this.showLoadMask(true, 'validating');
 // -------- helper
     /**
      * Returns the form-data of all cards in this wizard. The first index is the
-     * position of the card in this wizard (numeric, as found in <strong>this.cards<strong>),
+     * id of the card in this wizard,
      * and the values are objects containing key/value pairs in the form of
      * fieldName : fieldValue.
      *
@@ -233,13 +233,13 @@ this.showLoadMask(true, 'validating');
      */
     getWizardData : function()
     {
-        var formValues = [];
+        var formValues = {};
 		var cards = this.cards;
 		for (var i = 0, len = cards.length; i < len; i++) {
 		    if (cards[i].form) {
-		        formValues.push(cards[i].form.getValues(false));    
+		        formValues[cards[i].id] = cards[i].form.getValues(false);    
 		    } else {
-		        formValues.push({});
+		        formValues[cards[i].id] = {};
 		    }
 		}
 		
@@ -459,7 +459,7 @@ this.showLoadMask(true, 'validating');
 	 */
 	onFinish : function()
 	{
-	    if (this.fireEvent('finish', this.getWizardData()) !== false) {
+	    if (this.fireEvent('finish', this, this.getWizardData()) !== false) {
             this.close();
         }
 	},	
