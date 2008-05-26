@@ -52,7 +52,7 @@ this.showLoadMask(true, 'validating');
 	 </code></pre>	 
 	 */
 	loadMaskConfig : {
-	    default : 'Saving...'
+	    'default' : 'Saving...'
 	},
 	
     /**
