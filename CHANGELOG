@@ -1,5 +1,8 @@
 ﻿26.05.2008
 ==========
+ - fixed: IE complained about semicolon in examples/SimpleWizard.html
+ - fixed: removed "!important"-style-override in examples/SimpleWizard.html since IE doesn't like it
+ - fixed: quoted "default" in Ext.ux.Wiz.loadMaskConfig since it's a keyword in IE
  - fixed: finish-event did not pass the expected arguments to its listeners
  - enhancement: data returned by Ext.ux.Wiz.getWizardData now indexed by the 
  id's of the specific cards they represent
