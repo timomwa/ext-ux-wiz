@@ -1,0 +1,5 @@
+﻿26.05.2008
+==========
+ - fixed: finish-event did not pass the expected arguments to its listeners
+ - enhancement: data returned by Ext.ux.Wiz.getWizardData now indexed by the 
+ id's of the specific cards they represent
