@@ -25,6 +25,7 @@
 	float:left;
 	background-image:url(../images/ext-ux-wiz-stepIndicator.png);
 	background-position:6px 0px;
+	background-repeat:repeat-x; 
 	height:6px;
 	width:6px;
 }
