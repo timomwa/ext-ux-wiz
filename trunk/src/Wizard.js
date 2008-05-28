@@ -184,8 +184,11 @@ this.showLoadMask(true, 'validating');
 	    this.initButtons();
 	    this.initPanels();
 	    
+	    var title = this.title || this.headerConfig.title;
+	    title     = title || "";
+	    	    
 	    Ext.apply(this, {
-	        title     : this.title || this.headerConfig.title || "",
+	        title     : title,
 	        layout    : 'border',    
 	        cardCount : this.cards.length,
 		    buttons   : [
