@@ -1,4 +1,4 @@
-﻿Ext.namespace('Ext.ux');
+Ext.namespace('Ext.ux');
 
 /**
  * Licensed under GNU LESSER GENERAL PUBLIC LICENSE Version 3
@@ -221,7 +221,6 @@ this.showLoadMask(true, 'validating');
             'finish'
 	    );
 	    
-		this.initListeners();
 		Ext.ux.Wiz.superclass.initComponent.call(this);
 	},
 	
@@ -314,12 +313,15 @@ this.showLoadMask(true, 'validating');
      * Inits the listener for the various {@link Ext.ux.Wiz.Card}s used
      * by this component.
      */
-	initListeners : function()
+	initEvents : function()
 	{
+	    Ext.ux.Wiz.superclass.initEvents.call(this);
+	    
 		var cards = this.cards;
 		
 		for (var i = 0, len = cards.length; i < len; i++) {
 			cards[i].on('show', this.onCardShow, this);
+			cards[i].on('hide', this.onCardHide, this);
 			cards[i].on('clientvalidation', this.onClientValidation, this);
 		}
 	},
@@ -332,7 +334,8 @@ this.showLoadMask(true, 'validating');
      */
     initPanels : function()
     {
-        var cards = this.cards;
+        var cards           = this.cards;
+        var cardPanelConfig = this.cardPanelConfig;
         
         Ext.apply(this.headerConfig, {
             steps : cards.length    
@@ -340,18 +343,18 @@ this.showLoadMask(true, 'validating');
         
         this.headPanel = new Ext.ux.Wiz.Header(this.headerConfig);	
         
-        Ext.apply(this.cardPanelConfig, {
+        Ext.apply(cardPanelConfig, {
             layout : new Ext.ux.layout.CardLayout(),
             items  : cards	
         });
         
-        Ext.applyIf(this.cardPanelConfig, {
+        Ext.applyIf(cardPanelConfig, {
 			region     : 'center',
 			border     : false,
 			activeItem : 0
         }); 
         
-		this.cardPanel = new Ext.Panel(this.cardPanelConfig);  
+        this.cardPanel = new Ext.Panel(cardPanelConfig);  
     }, 
 
     /**
@@ -404,6 +407,19 @@ this.showLoadMask(true, 'validating');
 			this.nextButton.setDisabled(false);	
 		}
 	},
+	
+	/**
+	 * This will render the "next" button as disabled since the bindHandler's delay
+	 * of the next card to show might be lagging on slower systems
+	 * 
+	 */
+	onCardHide : function(card)
+	{
+	    if (this.cardPanel.layout.activeItem.id === card.id) {
+	        this.nextButton.setDisabled(true);	
+	    }
+	},
+	
 	
 	/**
 	 * Listener for the "show" event of the card that gets shown in the card-panel.

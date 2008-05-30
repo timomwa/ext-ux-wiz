@@ -1,4 +1,4 @@
-﻿Ext.namespace('Ext.ux.Wiz');
+Ext.namespace('Ext.ux.Wiz');
 
 /**
  * Licensed under GNU LESSER GENERAL PUBLIC LICENSE Version 3
