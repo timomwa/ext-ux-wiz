@@ -23,7 +23,7 @@
   <!-- In order to make the component work properly, you need to get the 
        Ext.ux.layout.CardLayout-component from http://www.siteartwork.de/cardlayout.
        Download and copy the files to your filesystem, then change this path accordingly  -->
-  <script type="text/javascript" src="../../CardLayout/CardLayout.js"></script>
+  <script type="text/javascript" src="../../CardLayout/src/CardLayout.js"></script>
   
   <!-- Ext.ux.Wiz files -->
   <script type="text/javascript" src="../src/Wizard.js"></script>
@@ -95,7 +95,7 @@ Ext.onReady(function(){
                         fieldLabel : 'Lastname',
                         allowBlank : false,
                         validator  : function(v){
-                            var t = /[a-zA-Z_\- ]/i;
+                            var t = /^[a-zA-Z_\- ]+$/
                             return t.test(v);
                         }
                     })
